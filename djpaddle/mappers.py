@@ -9,6 +9,8 @@ _cache.modules = {}
 
 def _get_fn(fn, *args, **kwargs):
     mod_name, func_name = fn.rsplit(".", 1)
+    if not hasattr(_cache, 'modules'):
+        _cache.modules = {}
     if mod_name not in _cache.modules:
         _cache.modules[mod_name] = importlib.import_module(mod_name)
     return getattr(_cache.modules[mod_name], func_name)
